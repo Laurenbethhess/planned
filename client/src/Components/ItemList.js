@@ -6,9 +6,16 @@ import TodoList from './TodoList'
 
 function ItemList({todos, onTodoDelete, onUpdateTodo, onAddTodo}) {
     const [search, setSearch] = useState("")
-    const [filterBy, setFilterBy] = useState('')
-
-    const filteredTodos = todos.filter(todo => todo.category.category === filterBy) 
+    const [filterBy, setFilterBy] = useState(0)
+    const notAssigned = 0
+    const chores = 1
+    const work = 2
+    const exercise = 3
+    const misc = 4
+    const groceries = 5
+    const school = 6
+    
+    const filteredTodos = todos.filter(todo => todo.category.name === filterBy) 
     const renderTodosList = filteredTodos.map(todo => <TodoList todo={todo} key={todo.id} onTodoDelete={onTodoDelete}/>)
     
     const onFilterChange = (e) => {
@@ -16,7 +23,7 @@ function ItemList({todos, onTodoDelete, onUpdateTodo, onAddTodo}) {
       }
 
     const displayedTodos = todos.filter(todo =>
-    todo.item.toLowerCase().includes(search.toLowerCase())
+    todo.todo.toLowerCase().includes(search.toLowerCase())
     )
 
     const renderTodos = displayedTodos.map(todo => <Item todo={todo} key={todo.id} onTodoDelete={onTodoDelete} onUpdateTodo={onUpdateTodo} />)
@@ -42,13 +49,13 @@ function ItemList({todos, onTodoDelete, onUpdateTodo, onAddTodo}) {
                     <div className='info'>Filter by Category</div>
                         <select className='select' onChange={onFilterChange} value={filterBy}>
                             <option value="">Choose Category</option>
-                            <option value="not assigned">Not Assigned</option>
-                            <option value="work">Work</option>
-                            <option value="chores">Chores</option>
-                            <option value="exercise">Exercise</option>
-                            <option value="misc">Misc</option>
-                            <option value="groceries">Groceries</option>
-                            <option value="school">School</option>
+                            <option value='notAssigned'>Not Assigned</option>
+                            <option value='chores'>Chores</option>
+                            <option value='work'>Work</option>
+                            <option value='exercise'>Exercise</option>
+                            <option value='misc'>Misc</option>
+                            <option value='groceries'>Groceries</option>
+                            <option value='school'>School</option>
                         </select>
                     <div id='todos-cat'>
                         {renderTodosList}

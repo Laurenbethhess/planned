@@ -3,7 +3,7 @@ import React, {} from 'react'
 function TodoList({todo, onTodoDelete}) {
 
     function handleDeleteClick() {
-        fetch(`http://localhost:9292/todos/${todo.id}`, {
+        fetch(`/todos/${todo.id}`, {
           method: "DELETE",
         })
         onTodoDelete(todo.id)
@@ -11,14 +11,14 @@ function TodoList({todo, onTodoDelete}) {
     
     return (
         <div className='all-todos'>
-            {todo.importance == "1. high" ? (
-                <li className="red"><button className='trash' onClick={handleDeleteClick}>❌</button>{todo.item.toLowerCase()} </li>
-            ) : todo.importance == "2. medium" ? (
-                <li className="orange"><button className='trash' onClick={handleDeleteClick}>❌</button>{todo.item.toLowerCase()} </li>
-            ) : todo.importance == "3. low" ? (
-                <li className="green" ><button className='trash' onClick={handleDeleteClick}>❌</button>{todo.item.toLowerCase()} </li> 
+            {todo.importance == 1 ? (
+                <li className="red"><button className='trash' onClick={handleDeleteClick}>❌</button>{todo.todo.toLowerCase()} </li>
+            ) : todo.importance == 2 ? (
+                <li className="orange"><button className='trash' onClick={handleDeleteClick}>❌</button>{todo.todo.toLowerCase()} </li>
+            ) : todo.importance == 3 ? (
+                <li className="green" ><button className='trash' onClick={handleDeleteClick}>❌</button>{todo.todo.toLowerCase()} </li> 
             ) : (
-                <li>{todo.item.toLowerCase()}</li> 
+                <li>{todo.todo.toLowerCase()}</li> 
             )}
         </div>
     )
