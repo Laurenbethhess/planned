@@ -47,7 +47,7 @@ function EditTodo({onUpdateTodo, todo}) {
                   type="text"
                   name="todo"
                   autoComplete="off"
-                  value={todo.todo}
+                  value={newTodo}
                   label="Edit Todo"
                   onChange={(e) => setTodo(e.target.value)}
                 />
@@ -55,7 +55,7 @@ function EditTodo({onUpdateTodo, todo}) {
                 <FormControl sx={{ minWidth: 275, bgcolor: '#cfe8fc' }}>
                   <InputLabel align='center'>Importance</InputLabel>
                     <Select
-                        value={todo.importance}
+                        value={importance}
                         label="Importance"
                         onChange={(e) => setImportance(e.target.value)}
                     >
@@ -68,7 +68,7 @@ function EditTodo({onUpdateTodo, todo}) {
                 <FormControl sx={{ minWidth: 275, bgcolor: '#cfe8fc' }}>
                   <InputLabel align='center'>Category</InputLabel>
                     <Select
-                        value={todo.category_id}
+                        value={category_id}
                         label="Category"
                         onChange={(e) => setCategoryId(e.target.value)}
                     >
