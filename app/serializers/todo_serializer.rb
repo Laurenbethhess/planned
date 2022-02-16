@@ -1,4 +1,4 @@
 class TodoSerializer < ActiveModel::Serializer
-  attributes :id, :todo, :importance, :category
+  attributes :id, :todo, :importance, :category, :category_id
   has_one :category
 end

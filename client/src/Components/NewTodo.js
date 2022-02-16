@@ -1,20 +1,29 @@
 import React, { useState } from 'react'
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
-function NewTodo({onAddTodo}) {
+function NewTodo({ onAddTodo }) {
     const [todo, setTodo] = useState("")
-    const [importance, setImportance] = useState("1. high")
-    const [category_id, setCategoryId] = useState("0")
-
+    const [importance, setImportance] = useState(1)
+    const [category_id, setCategoryId] = useState(0)
+    
     function handleSubmit(e) {
       e.preventDefault()
   
-      fetch("http://localhost:9292/todos", {
+      fetch("/todos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          item: todo,
+          todo: todo,
           importance: importance,
           category_id: category_id
         }),
@@ -30,38 +39,61 @@ function NewTodo({onAddTodo}) {
   
     return (
       <div>
-        <form className='add-forum' onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="item"
-            autoComplete="off"
-            value={todo}
-            placeholder="Add Todo..."
-            onChange={(e) => setTodo(e.target.value)}
-          />
-          <br></br>
-          <select className='importance' onChange={(e) => setImportance(e.target.value)}>
-            <option value={importance}>Choose Importance</option>
-            <option value="1. high">High</option>
-            <option value="2. medium">Medium</option>
-            <option value="3. low">Low</option>
-          </select>
-          <select className='category' onChange={(e) => setCategoryId(e.target.value)}>
-            <option value={category_id}>Choose Category</option>
-            <option value="0">Not Assigned</option>
-            <option value="1">Chores</option>
-            <option value="2">Work</option>
-            <option value="3">Exercise</option>
-            <option value="4">Misc</option>
-            <option value="5">Groceries</option>
-            <option value="6">School</option>
-          </select>
-          <br></br>
-          <button className='btn' id='add' type="submit">Add Todo</button>
-        </form>
+        <Card sx={{ maxWidth: 1000, bgcolor: '#cfe8fc' }} style={{backgroundColor: "#B1DFB0"}}>
+          <CardContent>
+              <Typography style={{fontSize: 20, fontFamily: "Courier"}} align='center' variant="p" gutterBottom component="div">
+                Create New Todo!
+              </Typography>       
+              <Typography >
+                <form onSubmit={handleSubmit}>
+                  <TextField
+                    sx={{bgcolor: '#cfe8fc' }}
+                    multiline
+                    variant="filled"
+                    type="text"
+                    name="todo"
+                    autoComplete="off"
+                    value={todo}
+                    label="New Todo"
+                    onChange={(e) => setTodo(e.target.value)}
+                  />
+                  <FormControl sx={{ minWidth: 275, bgcolor: '#cfe8fc' }}>
+                    <InputLabel align='center'>Importance</InputLabel>
+                      <Select
+                          value={importance}
+                          label="Importance"
+                          onChange={(e) => setImportance(e.target.value)}
+                      >
+                          <MenuItem value={1}>High</MenuItem>
+                          <MenuItem value={2}>Medium</MenuItem>
+                          <MenuItem value={3}>Low</MenuItem>
+                      </Select>
+                  </FormControl>
+                  <FormControl sx={{ minWidth: 275, bgcolor: '#cfe8fc' }}>
+                    <InputLabel align='center'>Category</InputLabel>
+                      <Select
+                          value={category_id}
+                          label="Category"
+                          onChange={(e) => setCategoryId(e.target.value)}
+                      >
+                          <MenuItem value={0}>Not Assigned</MenuItem>
+                          <MenuItem value={1}>Chores</MenuItem>
+                          <MenuItem value={2}>Work</MenuItem>
+                          <MenuItem value={3}>Exercise</MenuItem>
+                          <MenuItem value={4}>Misc</MenuItem>
+                          <MenuItem value={5}>Groceries</MenuItem>
+                          <MenuItem value={6}>School</MenuItem>
+                      </Select>
+                  </FormControl>
+                  <Button variant="outlined" type="submit">Submit</Button>
+                </form>
+              </Typography>
+          </CardContent>
+        </Card>
         <br/>
       </div>    
     )
 }
 
 export default NewTodo
+
