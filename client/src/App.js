@@ -56,7 +56,7 @@ function App() {
 
 
   return (
-   <div className="main">
+   <div className="body">
       <Nav user={user} onLogout={setUser}/>
       <Routes >
         <Route path="/" element={<Home updateTodo={handleUpdateTodo} todos={userTodos} onTodoDelete={handleDeleteItem} onAddTodo={handleAddTodo} user={user} />}/>
