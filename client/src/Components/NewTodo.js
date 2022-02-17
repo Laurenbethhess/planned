@@ -40,7 +40,7 @@ function NewTodo({ onAddTodo, user }) {
   
     return (
       <div>
-        <Card sx={{ maxWidth: 1000, bgcolor: '#cfe8fc' }} style={{backgroundColor: "#E07676"}}>
+        <Card sx={{ maxWidth: 1000 }} style={{backgroundColor: "#CAFFB7"}}>
           <CardContent>
               <Typography style={{fontSize: 20, fontFamily: "Courier"}} align='center' variant="p" gutterBottom component="div">
                 Create New Todo!

@@ -21,9 +21,9 @@ function Nav( { user, onLogout } ) {
 
     return (
             <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="fixed">
+            <AppBar style={{backgroundColor: "#FFB7B7"}} position="fixed">
                 <Toolbar>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style={{fontFamily: "Courier"}}>
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style={{fontFamily: "Courier", color: "#FFFFF3"}}>
                     {user?
                         <>Hello, {user.first_name} !</>
                     :
@@ -51,9 +51,9 @@ function Nav( { user, onLogout } ) {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style={{fontFamily: "Courier"}}>
                     <Link to="/groceries">Groceries</Link>
                 </Typography>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style={{fontFamily: "Courier"}}>
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style={{fontFamily: "Courier", color: "#FFFFF3"}}>
                     {user?
-                        <Button variant="outlined" style={{fontFamily: "Courier", fontSize: 20}} onClick={handleLogoutClick} color="inherit">Logout</Button>
+                        <Button variant="outlined" style={{fontFamily: "Courier", fontSize: 20 }} onClick={handleLogoutClick} color="inherit">Logout</Button>
                     :
                         <></>
                     } 
