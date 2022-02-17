@@ -1,4 +1,5 @@
 class TodosController < ApplicationController
+    skip_before_action :authorize
 
     def index
         render json: Todo.all
@@ -9,13 +10,13 @@ class TodosController < ApplicationController
     end
 
     def create
-        todo = Todo.create(todo_params)
+        todo = Todo.create!(todo_params)
         render json: todo, status: :created
     end
 
     def update
         todo = find_todo
-        todo.update(todo_params)
+        todo.update!(todo_params)
         render json: todo
     end
 
@@ -30,7 +31,7 @@ private
     end
 
     def todo_params
-        params.permit(:todo, :category_id, :importance)
+        params.permit(:todo, :category_id, :user_id, :importance)
     end
 
 end

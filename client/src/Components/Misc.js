@@ -9,7 +9,7 @@ function Misc( { todos, onTodoDelete, onUpdateTodo }) {
     return (
         <div align='center' style={{ paddingTop: 100}}>
             <Typography style={{fontSize: 20, fontFamily: "Courier"}} variant="p" gutterBottom component="div">
-                School Todos
+                Misc
             </Typography>
             {renderTodosList}
         </div>

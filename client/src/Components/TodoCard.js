@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import EditTodo from './EditTodo';
 import Button from '@mui/material/Button';
 
-
 function TodoCard({todo, onTodoDelete, updateTodo}) {
     const [editor, setEditor] = useState(false)
 

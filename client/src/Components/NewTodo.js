@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-function NewTodo({ onAddTodo }) {
+function NewTodo({ onAddTodo, user }) {
     const [todo, setTodo] = useState("")
     const [importance, setImportance] = useState(1)
     const [category_id, setCategoryId] = useState(0)
@@ -25,7 +25,8 @@ function NewTodo({ onAddTodo }) {
         body: JSON.stringify({
           todo: todo,
           importance: importance,
-          category_id: category_id
+          category_id: category_id,
+          user_id: user.id
         }),
       })
       .then((r) => r.json())

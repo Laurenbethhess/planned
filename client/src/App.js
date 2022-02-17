@@ -1,6 +1,5 @@
 import './App.css'
 import React, { useEffect, useState } from 'react'
-import ItemList from './Components/ItemList'
 import Home from './Components/Home'
 import { Routes, Route } from "react-router-dom";
 import Nav from './Components/Nav'
@@ -10,54 +9,34 @@ import Work from './Components/Work'
 import Exercise from './Components/Exercise'
 import Misc from './Components/Misc'
 import Groceries from './Components/Groceries'
+import Login from './Components/Login';
 
 function App() {
-  const [todos, setTodos] = useState([])
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetch('/todos')
-    .then(r => r.json())
-    .then(todos => setTodos(todos))
-  }, [])
+    // auto-login
+      fetch("/users/me").then((resp) => {
+        if (resp.ok) {
+          resp.json().then((user) => setUser(user));
+        }
+      });
+    }, []);
 
-  function handleAddTodo(newTodo) {
-    setTodos([...todos, newTodo])
-  }
-
-  const handleDeleteItem = (id) => {
-    const finalTodos = todos.filter(todo => todo.id !== id)
-    setTodos(finalTodos)
-  }
-
-  function handleUpdateTodo(updatedTodoObj) {
-    const updatedTodos = todos.map(todo => {
-      if (todo.id === updatedTodoObj.id) {
-        return updatedTodoObj;
-      } else {
-        return todo;
-      }
-    });
-    setTodos(updatedTodos);
-  }
+    if (!user) return <Login onLogin={setUser} />
 
   return (
    <div className="main">
-      <Nav />
+      <Nav user={user} onLogout={setUser}/>
       <Routes >
-        <Route path="/" element={<Home updateTodo={handleUpdateTodo} todos={todos} onTodoDelete={handleDeleteItem} onAddTodo={handleAddTodo} />}/>
-        <Route path="/school" element={<School todos={todos} onTodoDelete={handleDeleteItem} onUpdateTodo={handleUpdateTodo}/>}/>
-        <Route path="/chores" element={<Chores todos={todos} onTodoDelete={handleDeleteItem} onUpdateTodo={handleUpdateTodo}/>}/>
-        <Route path="/work" element={<Work todos={todos} onTodoDelete={handleDeleteItem} onUpdateTodo={handleUpdateTodo}/>}/>
-        <Route path="/exercise" element={<Exercise todos={todos} onTodoDelete={handleDeleteItem} onUpdateTodo={handleUpdateTodo}/>}/>
-        <Route path="/misc" element={<Misc todos={todos} onTodoDelete={handleDeleteItem} onUpdateTodo={handleUpdateTodo}/>}/>
-        <Route path="/groceries" element={<Groceries todos={todos} onTodoDelete={handleDeleteItem} onUpdateTodo={handleUpdateTodo}/>}/>
-
-      
-      
-      
+        <Route path="/" element={<Home user={user} onLogin={setUser} />}/>
+        <Route path="/school" element={<School/>}/>
+        <Route path="/chores" element={<Chores />}/>
+        <Route path="/work" element={<Work />}/>
+        <Route path="/exercise" element={<Exercise />}/>
+        <Route path="/misc" element={<Misc />}/>
+        <Route path="/groceries" element={<Groceries />}/>
       </Routes>
-
-     {/* <ItemList onAddTodo={handleAddTodo} todos={todos} onTodoDelete={handleDeleteItem} onUpdateTodo={handleUpdateTodo}/> */}
      <br/><br/>
    </div>
   )
