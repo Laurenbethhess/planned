@@ -13,6 +13,8 @@ function NewTodo({ onAddTodo, user }) {
     const [todo, setTodo] = useState("")
     const [importance, setImportance] = useState(1)
     const [category_id, setCategoryId] = useState(0)
+
+    const user_id = user.id
     
     function handleSubmit(e) {
       e.preventDefault()
@@ -26,7 +28,7 @@ function NewTodo({ onAddTodo, user }) {
           todo: todo,
           importance: importance,
           category_id: category_id,
-          user_id: user.id
+          user_id: user_id
         }),
       })
       .then((r) => r.json())

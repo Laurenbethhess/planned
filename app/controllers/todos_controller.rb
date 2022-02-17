@@ -31,7 +31,7 @@ private
     end
 
     def todo_params
-        params.permit(:todo, :category_id, :user_id, :importance)
+        params.permit(:category_id, :user_id, :todo, :importance)
     end
 
 end

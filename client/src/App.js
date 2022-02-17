@@ -49,11 +49,9 @@ function App() {
       });
       setTodos(updatedTodos);
   }
-  
     if (!user) return <Login onLogin={setUser} />
 
     const userTodos = todos.filter(todo => todo.user.id === user.id)
-
 
   return (
    <div className="body">
