@@ -2,9 +2,9 @@ import React, {} from "react";
 import TodoCard from './TodoCard'
 import Typography from '@mui/material/Typography';
 
-function Exercise( { todos, onTodoDelete, onUpdateTodo }) {
+function Exercise( { todos, onTodoDelete, updateTodo }) {
     const filteredTodos = todos.filter(todo => todo.category.name === 'exercise') 
-    const renderTodosList = filteredTodos.map(todo => <TodoCard todo={todo} key={todo.id} onTodoDelete={onTodoDelete}/>)
+    const renderTodosList = filteredTodos.map(todo => <TodoCard todo={todo} key={todo.id} onTodoDelete={onTodoDelete} updateTodo={updateTodo}/>)
 
     return (
         <div align='center' style={{ paddingTop: 100}}>

@@ -3,30 +3,9 @@ import TodoCard from './TodoCard'
 import Typography from '@mui/material/Typography';
 import NewTodo from './NewTodo';
 
-function Home({ user }) {
-    const [todos, setTodos] = useState(user.todos)
+function Home({ user, todos, updateTodo, onTodoDelete, onAddTodo }) {
 
-    function handleAddTodo(newTodo) {
-        setTodos([...todos, newTodo])
-      }
-    
-      const handleDeleteItem = (id) => {
-        const finalTodos = todos.filter(todo => todo.id !== id)
-        setTodos(finalTodos)
-      }
-    
-    function handleUpdateTodo(updatedTodoObj) {
-        const updatedTodos = todos.map(todo => {
-            if (todo.id === updatedTodoObj.id) {
-            return updatedTodoObj;
-            } else {
-            return todo;
-            }
-        });
-        setTodos(updatedTodos);
-    }    
-
-    const renderTodosListAll = todos.map(todo => <TodoCard updateTodo={handleUpdateTodo} todo={todo} key={todo.id} onTodoDelete={handleDeleteItem}/>)
+    const renderTodosListAll = todos.map(todo => <TodoCard updateTodo={updateTodo} todo={todo} key={todo.id} updateTodo={updateTodo}/>)
 
     return (
         <div align='center' style={{ paddingTop: 100}}>
@@ -35,7 +14,7 @@ function Home({ user }) {
             </Typography>
         <div>
             <Typography>
-                <NewTodo onAddTodo={handleAddTodo} user={user} />
+                <NewTodo onAddTodo={onAddTodo} user={user} />
             </Typography>
             {renderTodosListAll}
             <br/>

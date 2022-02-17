@@ -13,6 +13,13 @@ import Login from './Components/Login';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    fetch('/todos')
+    .then(r => r.json())
+    .then(todos => setTodos(todos))
+  }, [])
 
   useEffect(() => {
     // auto-login
@@ -23,19 +30,39 @@ function App() {
       });
     }, []);
 
+    function handleAddTodo(newTodo) {
+      setTodos([...todos, newTodo])
+    }
+  
+    const handleDeleteItem = (id) => {
+      const finalTodos = todos.filter(todo => todo.id !== id)
+      setTodos(finalTodos)
+    }
+  
+  function handleUpdateTodo(updatedTodoObj) {
+      const updatedTodos = todos.map(todo => {
+          if (todo.id === updatedTodoObj.id) {
+          return updatedTodoObj;
+          } else {
+          return todo;
+          }
+      });
+      setTodos(updatedTodos);
+  }    
+
     if (!user) return <Login onLogin={setUser} />
 
   return (
    <div className="main">
       <Nav user={user} onLogout={setUser}/>
       <Routes >
-        <Route path="/" element={<Home user={user} onLogin={setUser} />}/>
-        <Route path="/school" element={<School/>}/>
-        <Route path="/chores" element={<Chores />}/>
-        <Route path="/work" element={<Work />}/>
-        <Route path="/exercise" element={<Exercise />}/>
-        <Route path="/misc" element={<Misc />}/>
-        <Route path="/groceries" element={<Groceries />}/>
+        <Route path="/" element={<Home updateTodo={handleUpdateTodo} todos={todos} onTodoDelete={handleDeleteItem} onAddTodo={handleAddTodo} user={user} />}/>
+        <Route path="/school" element={<School updateTodo={handleUpdateTodo} todos={todos} onTodoDelete={handleDeleteItem} onAddTodo={handleAddTodo}/>}/>
+        <Route path="/chores" element={<Chores updateTodo={handleUpdateTodo} todos={todos} onTodoDelete={handleDeleteItem} onAddTodo={handleAddTodo}/>}/>
+        <Route path="/work" element={<Work updateTodo={handleUpdateTodo} todos={todos} onTodoDelete={handleDeleteItem} onAddTodo={handleAddTodo} />}/>
+        <Route path="/exercise" element={<Exercise updateTodo={handleUpdateTodo} todos={todos} onTodoDelete={handleDeleteItem} onAddTodo={handleAddTodo} />}/>
+        <Route path="/misc" element={<Misc updateTodo={handleUpdateTodo} todos={todos} onTodoDelete={handleDeleteItem} onAddTodo={handleAddTodo} />}/>
+        <Route path="/groceries" element={<Groceries updateTodo={handleUpdateTodo} todos={todos} onTodoDelete={handleDeleteItem} onAddTodo={handleAddTodo} />}/>
       </Routes>
      <br/><br/>
    </div>
