@@ -16,14 +16,14 @@ function App() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    fetch('https://my-plan-for-now.herokuapp.com/todos')
+    fetch('/todos')
     .then(r => r.json())
     .then(todos => setTodos(todos))
   }, [])
 
   useEffect(() => {
     // auto-login
-      fetch("https://my-plan-for-now.herokuapp.com/users/me").then((resp) => {
+      fetch("/users/me").then((resp) => {
         if (resp.ok) {
           resp.json().then((user) => setUser(user));
         }

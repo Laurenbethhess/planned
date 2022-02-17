@@ -11,7 +11,7 @@ function Nav( { user, onLogout } ) {
     const navigate = useNavigate();
 
     function handleLogoutClick() {
-        fetch("https://my-plan-for-now.herokuapp.com/logout", { method: "DELETE" }).then((r) => {
+        fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
                 onLogout(null);
             }

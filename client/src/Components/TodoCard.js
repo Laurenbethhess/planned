@@ -18,7 +18,7 @@ function TodoCard({todo, onTodoDelete, updateTodo}) {
     }
 
     function handleDeleteClick() {
-        fetch(`https://my-plan-for-now.herokuapp.com/todos/${todo.id}`, {
+        fetch(`/todos/${todo.id}`, {
           method: "DELETE",
         })
         onTodoDelete(todo.id)
