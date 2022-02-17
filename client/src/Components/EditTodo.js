@@ -17,7 +17,7 @@ function EditTodo({onUpdateTodo, todo}) {
     function handleFormSubmit(e) {
       e.preventDefault();
   
-      fetch(`/todos/${todo.id}`, {
+      fetch(`https://my-plan-for-now.herokuapp.com/todos/${todo.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

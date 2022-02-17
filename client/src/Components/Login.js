@@ -18,7 +18,7 @@ function Login({ onLogin }) {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    fetch("/login", {
+    fetch("https://my-plan-for-now.herokuapp.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

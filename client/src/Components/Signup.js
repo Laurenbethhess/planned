@@ -19,7 +19,7 @@ function Signup({ onLogin }) {
     setErrors([]);
     setIsLoading(true);
 
-    fetch("/users", {
+    fetch("https://my-plan-for-now.herokuapp.com/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
